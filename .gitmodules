@@ -1,0 +1,3 @@
+[submodule "src/github.com/Infra-Red/cf-postgresql-broker"]
+	path = src/github.com/Infra-Red/cf-postgresql-broker
+	url = https://github.com/Infra-Red/cf-postgresql-broker.git

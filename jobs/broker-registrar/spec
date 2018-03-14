@@ -1,0 +1,43 @@
+---
+name: broker-registrar
+
+templates:
+  errand.sh.erb: bin/run
+
+packages:
+  - cf-cli-6-linux
+
+consumes:
+- name: postgresql-service-broker
+  type: servicebroker
+- name: cloud_controller
+  type: cloud_controller
+  optional: true
+
+properties:
+  cf.api_url:
+    description: 'Full URL of Cloud Foundry API'
+  cf.admin_username:
+    description: 'Username of the admin user'
+  cf.admin_password:
+    description: 'Password of the admin user'
+  cf.skip_ssl_validation:
+    description: 'Skip SSL certificate validation'
+    default: true
+  cf.system_domain:
+    description: 'Cloud Foundry system domain'
+  broker.name:
+    description: 'Name of the service broker'
+    default: shared-postgresql-broker
+  broker.protocol:
+    description: 'Protocol (http/https) provided to the Cloud Controller when registering/deregistering the broker'
+    default: http
+  broker.enable_service_access:
+    description: 'Enable service access to all orgs specified, default to allow all orgs access'
+    default: true
+  broker.service_name:
+    description: 'Service name'
+    default: a.postgresql
+  broker.service_access_orgs:
+    description: 'Limit your service to only be accessible by the given org.'
+    default: []

@@ -1,0 +1,8 @@
+---
+name: postgresql-service-broker
+
+dependencies:
+- golang-1.10-linux
+
+files:
+- github.com/Infra-Red/cf-postgresql-broker/**/*

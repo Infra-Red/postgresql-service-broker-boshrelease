@@ -1,0 +1,23 @@
+{
+  "id": "5B9B280A-0A12-44AF-86E2-E2155BCB0D17",
+  "name": "a.postgresql",
+  "description": "PostgreSQL service provides access to shared instances of this database",
+  "bindable": true,
+  "metadata": {
+    "displayName": "PostgreSQL",
+    "documentationUrl": "https://www.postgresql.org/docs/9.6/static/index.html",
+    "imageUrl": "https://wiki.postgresql.org/images/3/30/PostgreSQL_logo.3colors.120x120.png"
+  },
+  "plan_updateable": false,
+  "plans": [
+    {
+      "id": "EA7AA517-EB2F-4A6E-9CE1-7BC6934814C1",
+      "name": "standard",
+      "description": "PostgreSQL service provides access to shared instances of this database",
+      "free": true,
+      "metadata": {
+        "displayName": "PostgreSQL"
+      }
+    }
+  ]
+}

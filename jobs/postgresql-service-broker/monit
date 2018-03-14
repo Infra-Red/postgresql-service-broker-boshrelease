@@ -1,0 +1,5 @@
+check process postgresql-service-broker
+  with pidfile /var/vcap/sys/run/bpm/postgresql-service-broker/postgresql-service-broker.pid
+  start program "/var/vcap/jobs/bpm/bin/bpm start postgresql-service-broker"
+  stop program "/var/vcap/jobs/bpm/bin/bpm stop postgresql-service-broker"
+  group vcap

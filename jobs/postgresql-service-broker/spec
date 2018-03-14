@@ -1,0 +1,41 @@
+---
+name: postgresql-service-broker
+
+templates:
+  bpm.yml: config/bpm.yml
+  catalog.json: config/catalog.json
+
+packages:
+- postgresql-service-broker
+
+consumes:
+- name: postgres
+  type: database
+
+provides:
+- name: postgresql-service-broker
+  type: servicebroker
+  properties:
+  - broker.name
+  - broker.password
+  - broker.port
+  - broker.username
+
+properties:
+  broker.username:
+    description: Service broker basic auth username
+    default: broker
+  broker.password:
+    description: Service broker basic auth password
+  broker.name:
+    description: Name used to register service broker
+    default: shared-postgresql-broker
+  broker.port:
+    description: Port used to bind service broker
+    default: 8080
+  broker.db.user:
+    description: PostgreSQL user for Service Broker
+  broker.db.password:
+    description: Password for PostgreSQL Service Broker user
+  broker.db.database:
+    description: PostgreSQL database for Service Broker

@@ -1,0 +1,17 @@
+---
+processes:
+- name: postgresql-service-broker
+  executable: /var/vcap/packages/postgresql-service-broker/bin/postgresql-broker
+  args: []
+  ephemeral_disk: true
+  persistent_disk: false
+  env:
+    PORT: <%= p("broker.port") %>
+    BROKER_USERNAME: <%= p("broker.username") %>
+    BROKER_PASSWORD: <%= p("broker.password") %>
+    CATALOG_PATH: /var/vcap/jobs/postgresql-service-broker/config/catalog.json
+    <% db = link('postgres'); db_port = db.p('databases.port') %>
+    PG_SOURCE: postgresql://<%= p('broker.db.user') %>:<%= p('broker.db.password') %>@<%= db.instances.first.address %>:<%= db_port %>/<%= p('broker.db.database') %>
+  limits:
+    memory: 128M
+    open_files: 1024
