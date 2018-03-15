@@ -1,0 +1,38 @@
+name: postgresql-service-broker
+version: 0.1.0
+commit_hash: 1221df8
+uncommitted_changes: true
+jobs:
+- name: broker-deregistrar
+  version: 5e1616f7dd036fa4c178f7f0d0fa13e637b13a87
+  fingerprint: 5e1616f7dd036fa4c178f7f0d0fa13e637b13a87
+  sha1: abb4ef029db425ed80b50f831fc0ccadbe56c380
+- name: broker-registrar
+  version: ff57ce3ebe34c36270940b9483bfee61b0b9281a
+  fingerprint: ff57ce3ebe34c36270940b9483bfee61b0b9281a
+  sha1: cd63c0bbb3879cc504c295c28533153920f20ef8
+- name: postgresql-service-broker
+  version: 6f06b235cd8231edcbab76aa33961c855681cf58
+  fingerprint: 6f06b235cd8231edcbab76aa33961c855681cf58
+  sha1: a41e9252a621b6169a145769de7c6ae503b1e132
+packages:
+- name: cf-cli-6-linux
+  version: b501c00e999e27a5354f7ebd06e1e7d061ed0855
+  fingerprint: b501c00e999e27a5354f7ebd06e1e7d061ed0855
+  sha1: 10e082f726b826ee1da6902993f2de6a3f7c8945
+  dependencies: []
+- name: golang-1.10-linux
+  version: 48c842421b6f05acf88dc6ec17f7574dade28a86
+  fingerprint: 48c842421b6f05acf88dc6ec17f7574dade28a86
+  sha1: e9a18aebf2c407ce17423c22c913b6612cf4b75f
+  dependencies: []
+- name: postgresql-service-broker
+  version: 4fe9d366fd961518f25e02afda08c315c4458c55
+  fingerprint: 4fe9d366fd961518f25e02afda08c315c4458c55
+  sha1: 7269cbc53a6826cc14abb271cd34fbd128e3c04b
+  dependencies:
+  - golang-1.10-linux
+license:
+  version: a8ff343f3a9cb03adcdc6d75de7a8cf42e01378c
+  fingerprint: a8ff343f3a9cb03adcdc6d75de7a8cf42e01378c
+  sha1: 1159f728719538b980251cb1e5f0a77661c8387b
