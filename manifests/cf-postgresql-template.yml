@@ -1,0 +1,66 @@
+---
+name: ((deployment-name))
+
+releases:
+- name: bpm
+  url: https://bosh.io/d/github.com/cloudfoundry-incubator/bpm-release?v=0.4.0
+  version: 0.4.0
+  sha1: 5a03b988c725c6b5a1aed247c8c23c2bff9d421b
+- name: postgresql-service-broker
+  version: "latest"
+
+stemcells:
+- alias: default
+  os: ubuntu-trusty
+  version: ((stemcell-version))
+
+instance_groups:
+- name: postgresql-service-broker
+  instances: 1
+  stemcell: default
+  networks:
+  - name: default
+  azs:
+  - z1
+  vm_type: small
+  jobs:
+  - name: bpm
+    release: bpm
+  - name: postgresql-service-broker
+    release: postgresql-service-broker
+    consumes:
+      postgres: {from: postgres-database, deployment: postgres}
+    properties:
+      broker:
+        password: ((broker_basic_auth))
+        db:
+          user: ((pg_broker_username))
+          password: ((pg_broker_password))
+          database: ((pg_broker_database))
+  - name: broker-registrar
+    release: postgresql-service-broker
+    consumes:
+      cloud_controller: {from: cloud_controller, deployment: cf}
+    properties:
+      cf:
+        admin_username: ((cf_admin_username))
+        admin_password: ((cf_admin_password))
+  - name: broker-deregistrar
+    release: postgresql-service-broker
+    consumes:
+      cloud_controller: {from: cloud_controller, deployment: cf}
+    properties:
+      cf:
+        admin_username: ((cf_admin_username))
+        admin_password: ((cf_admin_password))
+
+variables:
+- name: broker_basic_auth
+  type: password
+
+update:
+  canaries: 1
+  canary_watch_time: 30000-600000
+  max_in_flight: 1
+  serial: true
+  update_watch_time: 5000-600000

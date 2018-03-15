@@ -1,0 +1,11 @@
+---
+deployment-name: postgresql-service-broker
+
+stemcell-version: latest
+
+pg_broker_username: pgadmin
+pg_broker_password: password
+pg_broker_database: sandbox
+
+cf_admin_username: admin
+cf_admin_password: password
