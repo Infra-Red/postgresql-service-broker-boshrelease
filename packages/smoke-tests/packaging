@@ -1,0 +1,8 @@
+set -e
+
+PACKAGE_NAME=github.com/Infra-Red/cf-postgresql-smoke-tests
+PACKAGE_DIR=${BOSH_INSTALL_TARGET}/src/${PACKAGE_NAME}
+
+mkdir -p $PACKAGE_DIR
+
+cp -a github.com/Infra-Red/cf-postgresql-smoke-tests/* $PACKAGE_DIR

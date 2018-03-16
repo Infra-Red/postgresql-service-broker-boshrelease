@@ -1,0 +1,7 @@
+---
+name: smoke-tests
+
+dependencies: []
+
+files:
+- github.com/Infra-Red/cf-postgresql-smoke-tests/**/*

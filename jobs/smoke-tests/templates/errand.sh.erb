@@ -1,0 +1,24 @@
+#!/bin/bash
+
+set -e
+
+source /var/vcap/packages/golang-1.10-linux/bosh/compile.env
+source /var/vcap/packages/cf-cli-6-linux/bosh/runtime.env
+
+export GOPATH=/var/vcap/packages/smoke-tests
+export PACKAGE_NAME=github.com/Infra-Red/cf-postgresql-smoke-tests
+export PATH=${GOPATH}/bin:${PATH}
+
+export CF_COLOR=false
+export CONFIG_PATH=/var/vcap/jobs/smoke-tests/config/config.json
+
+cd ${GOPATH}/src/${PACKAGE_NAME}
+
+echo "Running smoke tests..."
+
+EXITSTATUS=0
+
+./bin/test || EXITSTATUS=$?
+
+echo "Smoke Tests Complete; exit status: $EXITSTATUS"
+exit $EXITSTATUS

@@ -1,0 +1,45 @@
+<%
+  api_url = nil
+  if_p('cf.api_url') do |prop|
+    api_url = prop
+  end.else do
+    api_url = "https://api." + link('cloud_controller').p('system_domain').to_s
+  end
+
+  sys_domain = nil
+  if_p('cf.system_domain') do |prop|
+    sys_domain = prop
+  end.else do
+    sys_domain = link('cloud_controller').p('system_domain').to_s
+  end
+
+  apps_domain = nil
+  if_p('cf.apps_domain') do |prop|
+    apps_domain = prop
+  end.else do
+    apps_domain = link('cloud_controller').p('app_domains').first
+  end
+%>
+
+<%=
+require 'json'
+
+config = {}
+config[:service_name] = p("broker.service_name")
+config[:apps_domain] = apps_domain
+config[:system_domain] = sys_domain
+config[:api] = api_url
+config[:admin_user] = p("cf.admin_username")
+config[:admin_password] = p("cf.admin_password")
+config[:space_name] = "postgres-test-space"
+config[:org_name] = "postgres-test-org"
+config[:skip_ssl_validation] = p("cf.skip_ssl_validation")
+config[:create_permissive_security_group] = false
+config[:retry] = { max_attempts: p("retry.max_attempts"), backoff: p("retry.backoff"), baseline_interval_milliseconds: p("retry.baseline_interval_milliseconds") }
+config[:plan_names] = []
+p("broker.service_plans").each do |plan|
+  config[:plan_names] << plan
+end
+
+JSON.pretty_generate(config)
+%>
